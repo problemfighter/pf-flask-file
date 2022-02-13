@@ -32,4 +32,3 @@ For guidance on setting up a development environment and how to make a contribut
 * **Source Code :** [https://github.com/problemfighter/pf-flask-file](https://github.com/problemfighter/pf-flask-file)
 * **Issue Tracker :** [https://github.com/problemfighter/pf-flask-file/issues](https://github.com/problemfighter/pf-flask-file/issues)
 * **Website :** [https://www.problemfighter.com/open-source](https://www.problemfighter.com/open-source)
-
