@@ -1,4 +1,5 @@
 from werkzeug.datastructures import FileStorage
+from pf_py_file.pfpf_string_util import PFPFStringUtil
 
 
 class PFFFFileHelper:
@@ -35,3 +36,12 @@ class PFFFFileHelper:
     @staticmethod
     def allowed_file(filename, file_extensions: list):
         return '.' in filename and filename.rsplit('.', 1)[1].lower() in file_extensions
+
+    @staticmethod
+    def process_file_name(file_name: str):
+        if file_name:
+            file_name = PFPFStringUtil.camelcase_to(file_name, "-")
+            file_name = PFPFStringUtil.find_and_replace_with(file_name, "_", "-")
+            file_name = PFPFStringUtil.replace_space_with(file_name, "-")
+            file_name = file_name.lower()
+        return file_name
