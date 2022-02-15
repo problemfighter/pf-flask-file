@@ -36,7 +36,7 @@ class PFFFFileUploadMan:
         PFPFFileUtil.create_directories(upload_path)
         file_upload_path = PFPFFileUtil.join_path(upload_path, filename)
         if override:
-            PFPFFileUtil.delete(file_upload_path)
+            PFPFFileUtil.delete_file(file_upload_path)
             file_storage.save(file_upload_path)
         return filename
 
