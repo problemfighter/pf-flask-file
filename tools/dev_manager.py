@@ -83,7 +83,7 @@ def clone_pull_setup(projects: dict):
 source_projects = {
     "dir": LIBRARY_DEPENDENCY,
     "repositories": {
-        "xxxxxx": "https://github.com/problemfighter/xxxxxxx.git",
+        "pf-flask-rest-com": "https://github.com/problemfighter/pf-flask-rest-com.git",
     }
 }
 

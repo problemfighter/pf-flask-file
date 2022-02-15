@@ -1,0 +1,17 @@
+
+
+* Size Validation
+* Mimetype Validation (x)
+*
+
+```
+options = {
+  'validation': {
+    'allowedExts': ['txt'],
+    'allowedMimeTypes': ['text/plain']
+  }
+}
+```
+
+
+
