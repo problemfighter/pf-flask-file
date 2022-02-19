@@ -1,5 +1,5 @@
 from werkzeug.datastructures import FileStorage
-from pf_py_file.pfpf_string_util import PFPFStringUtil
+from pf_py_text.pfpt_string_util import PFPTStringUtil
 
 
 class PFFFFileHelper:
@@ -40,8 +40,8 @@ class PFFFFileHelper:
     @staticmethod
     def process_file_name(file_name: str):
         if file_name:
-            file_name = PFPFStringUtil.camelcase_to(file_name, "-")
-            file_name = PFPFStringUtil.find_and_replace_with(file_name, "_", "-")
-            file_name = PFPFStringUtil.replace_space_with(file_name, "-")
+            file_name = PFPTStringUtil.camelcase_to(file_name, "-")
+            file_name = PFPTStringUtil.find_and_replace_with(file_name, "_", "-")
+            file_name = PFPTStringUtil.replace_space_with(file_name, "-")
             file_name = file_name.lower()
         return file_name
