@@ -40,6 +40,52 @@ class PFFFFileUploadMan:
             file_storage.save(file_upload_path)
         return filename
 
+    def _get_file_name_from_list(self, index, list_data: list, default_name: str = "file"):
+        try:
+            if not list_data:
+                return None
+            return list_data[index]
+        except IndexError:
+            return default_name + str(index)
+
+    def validate_and_upload_multiple(self, files: dict, api_def: APIDef, upload_path, override_name: dict = None, override: bool = True):
+        response_file_name = {}
+        for input_name in files:
+            field: FileField = self._get_file_input(input_name, api_def)
+            if field.is_multiple:
+                override_name_index = 0
+                multiple_file_name = []
+                override_name_list = []
+                if override_name and input_name in override_name and isinstance(override_name[input_name], list):
+                    multiple_file_name = {}
+                    override_name_list = override_name[input_name]
+                for file in files[input_name]:
+                    _override_name = None
+                    file_name = self._get_file_name_from_list(override_name_index, override_name_list)
+                    override_name_index += 1
+                    if file_name:
+                        _override_name = {input_name: file_name}
+                    response = self.validate_and_upload(
+                        files={input_name: file},
+                        api_def=api_def,
+                        upload_path=upload_path,
+                        override_name=_override_name,
+                        override=override)
+                    if isinstance(multiple_file_name, list):
+                        multiple_file_name.append(response[input_name])
+                    elif isinstance(multiple_file_name, dict) and file_name:
+                        multiple_file_name[file_name] = response[input_name]
+                response_file_name.update({input_name: multiple_file_name})
+            else:
+                response = self.validate_and_upload(
+                    files={input_name: files[input_name]},
+                    api_def=api_def,
+                    upload_path=upload_path,
+                    override_name=override_name,
+                    override=override)
+                response_file_name.update(response)
+        return response_file_name
+
     def validate_and_upload(self, files: dict, api_def: APIDef, upload_path, override_name: dict = None, override: bool = True):
         errors = {}
         if not upload_path:
