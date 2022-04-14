@@ -1,0 +1,2 @@
+class FFMPEGHelper:
+    pass

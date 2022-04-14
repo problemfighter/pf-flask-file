@@ -9,12 +9,12 @@ env = os.environ.get('source')
 
 
 def get_dependencies():
-    dependency = ["Flask"]
+    dependency = ["Flask", "ffmpeg-python"]
 
     if env and env == "dev":
         return dependency
 
-    return dependency + ["PF-Flask-Rest-Com", "PF-PY-Text"]
+    return dependency + ["PF-Flask-Rest-Com", "PF-PY-Text", "PF-PY-File"]
 
 
 setup(
