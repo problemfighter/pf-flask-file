@@ -9,7 +9,7 @@ env = os.environ.get('source')
 
 
 def get_dependencies():
-    dependency = ["Flask", "moviepy"]
+    dependency = ["Flask", "moviepy", "Pillow"]
 
     if env and env == "dev":
         return dependency
