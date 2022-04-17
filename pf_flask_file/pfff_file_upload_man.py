@@ -27,7 +27,7 @@ class PFFFFileUploadMan:
         return True
 
     def upload_file(self, input_name, file_storage: FileStorage, upload_path, override_name: dict = None, override: bool = True):
-        filename = secure_filename(file_storage.filename)
+        filename = secure_filename(file_storage.filename.lower())
         filename = PFFFFileHelper.process_file_name(filename)
         if override_name and input_name in override_name:
             filename = override_name[input_name] + "." + PFFFFileHelper.get_file_extension(filename)
