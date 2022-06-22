@@ -15,13 +15,16 @@ class FileInfoHelper:
         ffmpeg_helper = FFMPEGHelper()
         model = FileInfoHelper.set_file_info(file_path, model)
 
+        duration = None
         if file_type == "audio":
             ffmpeg_helper.set_audio_file(file_path)
+            duration = ffmpeg_helper.get_audio_duration()
         else:
             ffmpeg_helper.set_vdo_file(file_path)
+            duration = ffmpeg_helper.get_vdo_duration()
 
         if hasattr(model, "duration"):
-            setattr(model, "duration", ffmpeg_helper.get_audio_duration())
+            setattr(model, "duration", duration)
         return model
 
     @staticmethod
