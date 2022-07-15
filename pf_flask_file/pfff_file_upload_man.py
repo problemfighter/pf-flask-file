@@ -114,3 +114,8 @@ class PFFFFileUploadMan:
         if errors:
             raise pffrc_exception.error_details_exception(PFFFMessage.VALIDATION_ERROR, errors)
         return files
+
+    def get_file_name(self, file_storage: FileStorage):
+        if not file_storage:
+            return None
+        return file_storage.filename
