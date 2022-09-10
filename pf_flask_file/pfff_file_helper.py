@@ -42,11 +42,12 @@ class PFFFFileHelper:
     @staticmethod
     def process_file_name(file_name: str):
         if file_name:
+            for sep in os.path.sep, os.path.altsep:
+                if sep:
+                    file_name = file_name.replace(sep, " ")
+
             file_name = PFPTStringUtil.camelcase_to(file_name, "-")
             file_name = PFPTStringUtil.find_and_replace_with(file_name, "_", "-")
             file_name = PFPTStringUtil.replace_space_with(file_name, "-")
             file_name = file_name.lower()
-        for sep in os.path.sep, os.path.altsep:
-            if sep:
-                file_name = file_name.replace(sep, " ")
         return file_name
