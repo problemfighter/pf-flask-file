@@ -1,3 +1,5 @@
+import os
+
 from werkzeug.datastructures import FileStorage
 from pf_py_text.pfpt_string_util import PFPTStringUtil
 
@@ -44,4 +46,7 @@ class PFFFFileHelper:
             file_name = PFPTStringUtil.find_and_replace_with(file_name, "_", "-")
             file_name = PFPTStringUtil.replace_space_with(file_name, "-")
             file_name = file_name.lower()
+        for sep in os.path.sep, os.path.altsep:
+            if sep:
+                file_name = file_name.replace(sep, " ")
         return file_name
