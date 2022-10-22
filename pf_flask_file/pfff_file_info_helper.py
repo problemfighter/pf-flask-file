@@ -1,4 +1,5 @@
 from pf_flask_file.pfff_ffmpeg_helper import FFMPEGHelper
+from pf_flask_file.pfff_file_helper import PFFFFileHelper
 from pf_flask_file.pfff_image_helper import ImageHelper
 
 
@@ -34,3 +35,17 @@ class FileInfoHelper:
     @staticmethod
     def set_video_info(file_path, model):
         return FileInfoHelper.set_audio_or_video_info(file_path, model, "video")
+
+    @staticmethod
+    def set_file_details_info(file_path, model):
+        filename = PFFFFileHelper.get_filename(file_path)
+        file_type = PFFFFileHelper.get_file_type(filename)
+        if hasattr(model, "fileType"):
+            setattr(model, "fileType", file_type)
+        if file_type == "audio":
+            model = FileInfoHelper.set_audio_info(file_path, model)
+        elif file_type == "video":
+            model = FileInfoHelper.set_video_info(file_path, model)
+        else:
+            model = FileInfoHelper.set_file_info(file_path, model)
+        return model

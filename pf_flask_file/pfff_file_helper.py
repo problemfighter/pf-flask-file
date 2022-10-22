@@ -1,5 +1,4 @@
 import os
-
 from werkzeug.datastructures import FileStorage
 from pf_py_text.pfpt_string_util import PFPTStringUtil
 
@@ -34,6 +33,34 @@ class PFFFFileHelper:
     def get_file_extension(filename):
         if '.' in filename:
             return filename.rsplit('.', 1)[1].lower()
+
+    @staticmethod
+    def get_file_type(filename):
+        file_extension = PFFFFileHelper.get_file_extension(filename)
+        if file_extension in ["jpg", "png", "jpeg"]:
+            return "image"
+        if file_extension in ["mp3", "wav"]:
+            return "audio"
+        elif file_extension in ["mp4", "avi"]:
+            return "video"
+        elif file_extension in ["pdf"]:
+            return "pdf"
+        elif file_extension in ["doc", "docx", "txt"]:
+            return "doc"
+        elif file_extension in ["xls", "xlsx"]:
+            return "sheet"
+        elif file_extension in ["adoc"]:
+            return "asciiDoc"
+        elif file_extension in ["md"]:
+            return "markdown"
+        else:
+            return "file"
+
+    @staticmethod
+    def get_filename(path_with_filename):
+        path_with_filename = path_with_filename.rstrip(os.sep)
+        filename = os.path.basename(path_with_filename)
+        return filename
 
     @staticmethod
     def allowed_file(filename, file_extensions: list):
